@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: pagination-talk
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pagination
+    username: postgres
+    password: postgres_secret
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}
+  shutdown: graceful
