@@ -3,6 +3,9 @@ package org.quicklybly.concurrency;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * What is the output of the following code and how to fix it?
+ */
 public class Counter {
     private static int count = 0;
 
