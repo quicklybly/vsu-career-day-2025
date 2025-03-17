@@ -17,7 +17,7 @@ public class SimpleStackImpl implements SimpleStack {
         }
     }
 
-    private AtomicReference<Node> head;
+    private AtomicReference<Node> head = new AtomicReference<>(null);
 
     @Override
     public void push(Integer value) {
@@ -27,7 +27,7 @@ public class SimpleStackImpl implements SimpleStack {
         do {
             prevHead = head.get();
             newHead.prev = prevHead;
-        } while (head.compareAndSet(prevHead, newHead));
+        } while (!head.compareAndSet(prevHead, newHead));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SimpleStackImpl implements SimpleStack {
                 return null;
             }
             newHead = currHead.prev;
-        } while (head.compareAndSet(currHead, newHead));
-        return 0;
+        } while (!head.compareAndSet(currHead, newHead));
+        return currHead.value;
     }
 }
