@@ -17,7 +17,7 @@ public class SimpleStackImpl implements SimpleStack {
         }
     }
 
-    private AtomicReference<Node> head = new AtomicReference<>(null);
+    private final AtomicReference<Node> head = new AtomicReference<>(null);
 
     @Override
     public void push(Integer value) {
