@@ -1,16 +1,19 @@
 package org.quicklybly.streams;
 
-import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class ExternalCallClient {
 
     public CompletableFuture<Integer> call(Integer parameter) {
-        try {
-            Thread.sleep(Duration.ofSeconds(3));
-            return CompletableFuture.completedFuture(parameter);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Sleep interrupted", e);
+            }
+            return parameter;
+        });
     }
 }
